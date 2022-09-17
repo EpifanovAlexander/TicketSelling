@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using TicketSelling.Controllers.Tickets.Dto;
 
 namespace TicketSelling.Controllers.Tickets
 {
@@ -8,13 +9,13 @@ namespace TicketSelling.Controllers.Tickets
     public class TicketController : ControllerBase
     {
         [HttpPost("sale/")]
-        public void Sale()
+        public void Sale(SaleTicketDto model)
         {
             
         }
 
         [HttpPost("refund/")]
-        public void Refund()
+        public void Refund(RefundTicketDto model)
         {
             
         }
