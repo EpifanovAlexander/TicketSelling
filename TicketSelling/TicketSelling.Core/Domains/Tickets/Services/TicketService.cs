@@ -8,12 +8,12 @@ namespace TicketSelling.Core.Domains.Tickets.Services
 {
     public class TicketService : ITicketService
     {
-        public void RefundTicket()
+        public Task RefundTicket(RefundTicket refundTicket, CancellationToken token)
         {
             throw new NotImplementedException();
         }
 
-        public void SaleTicket()
+        public Task SaleTicket(SaleTicket saleTicket, CancellationToken token)
         {
             throw new NotImplementedException();
         }
