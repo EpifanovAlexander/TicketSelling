@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using TicketSelling.Core;
 using TicketSelling.Core.Mappers;
 using TicketSelling.Data;
+using TicketSelling.Data.Mappers;
 using TicketSelling.HostedServices;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,7 +19,7 @@ builder.Services.AddApiVersioning(config =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddAutoMapper(typeof(MappingProfile));
+builder.Services.AddAutoMapper(typeof(MappingProfile), typeof(DbModelMappingProfile));
 builder.Services.AddHostedService<MigrationHostedService>();
 builder.Services
     .AddData(builder.Configuration)
