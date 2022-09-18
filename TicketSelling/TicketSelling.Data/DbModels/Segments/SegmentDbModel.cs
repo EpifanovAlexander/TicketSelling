@@ -11,10 +11,10 @@ namespace TicketSelling.Data.DbModels.Segments
         public int FlightNumber { get; set; }
         public string DepartPlace { get; set; }
         public DateTimeOffset DepartDatetime { get; set; }
-        public int DepartTimeZone { get; private set; }
+        public short DepartTimeZone { get; private set; }
         public string ArrivePlace { get; set; }
         public DateTimeOffset ArriveDatetime { get; set; }
-        public int ArriveTimeZone { get; private set; }
+        public short ArriveTimeZone { get; private set; }
         public string PnrId { get; set; }
         public string State { get; set; }
 
@@ -25,10 +25,10 @@ namespace TicketSelling.Data.DbModels.Segments
             FlightNumber = flightNumber;
             DepartPlace = departPlace;
             DepartDatetime = departDatetime;
-            DepartTimeZone = departDatetime.Offset.Hours;
+            DepartTimeZone = Convert.ToInt16(departDatetime.Offset.Hours);
             ArrivePlace = arrivePlace;
             ArriveDatetime = arriveDatetime;
-            ArriveTimeZone = arriveDatetime.Offset.Hours;
+            ArriveTimeZone = Convert.ToInt16(arriveDatetime.Offset.Hours);
             PnrId = pnrId;
         }
 

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using TicketSelling.Data;
@@ -11,9 +12,10 @@ using TicketSelling.Data;
 namespace TicketSelling.Data.Migrations
 {
     [DbContext(typeof(TicketSellingContext))]
-    partial class TicketSellingContextModelSnapshot : ModelSnapshot
+    [Migration("20220918183753_Change_timezone_to_smallint")]
+    partial class Change_timezone_to_smallint
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
