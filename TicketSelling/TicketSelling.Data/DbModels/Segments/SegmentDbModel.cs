@@ -5,7 +5,7 @@ namespace TicketSelling.Data.DbModels.Segments
 {
     public class SegmentDbModel
     {
-        public long TicketNumber { get; set; }
+        public string TicketNumber { get; set; }
         public int SerialNumber { get; set; }
         public string AirlineCode { get; set; }
         public int FlightNumber { get; set; }
@@ -18,11 +18,9 @@ namespace TicketSelling.Data.DbModels.Segments
         public string PnrId { get; set; }
         public string State { get; set; }
 
-        public SegmentDbModel(long ticketNumber, int serialNumber, string airlineCode, int flightNumber, string departPlace,
-            DateTimeOffset departDatetime, string arrivePlace, DateTimeOffset arriveDatetime, string pnrId, string state)
+        public SegmentDbModel(string airlineCode, int flightNumber, string departPlace,
+            DateTimeOffset departDatetime, string arrivePlace, DateTimeOffset arriveDatetime, string pnrId)
         {
-            TicketNumber = ticketNumber;
-            SerialNumber = serialNumber;
             AirlineCode = airlineCode;
             FlightNumber = flightNumber;
             DepartPlace = departPlace;
@@ -32,9 +30,7 @@ namespace TicketSelling.Data.DbModels.Segments
             ArriveDatetime = arriveDatetime;
             ArriveTimeZone = arriveDatetime.Offset.Hours;
             PnrId = pnrId;
-            State = state;
         }
-
 
         internal class Map : IEntityTypeConfiguration<SegmentDbModel>
         {
@@ -66,6 +62,9 @@ namespace TicketSelling.Data.DbModels.Segments
                     .HasColumnName("depart_datetime")
                     .IsRequired();
 
+                builder.Property(it => it.DepartTimeZone)
+                    .HasColumnName("depart_datetime_timezone");
+
                 builder.Property(it => it.ArrivePlace)
                     .HasColumnName("arrive_place")
                     .IsRequired();
@@ -73,6 +72,9 @@ namespace TicketSelling.Data.DbModels.Segments
                 builder.Property(it => it.ArriveDatetime)
                     .HasColumnName("arrive_datetime")
                     .IsRequired();
+
+                builder.Property(it => it.ArriveTimeZone)
+                    .HasColumnName("arrive_datetime_timezone");
 
                 builder.Property(it => it.PnrId)
                     .HasColumnName("pnr_id")
