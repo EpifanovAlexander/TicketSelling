@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32210.308
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketSelling", "TicketSelling.csproj", "{31CE3D0D-160A-45F7-A98B-A2D1097A6710}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketSelling", "TicketSelling\TicketSelling.csproj", "{31CE3D0D-160A-45F7-A98B-A2D1097A6710}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketSelling.Data", "TicketSelling.Data\TicketSelling.Data.csproj", "{0B79B787-920B-498E-8C26-9E85FB4B473B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketSelling.Core", "TicketSelling.Core\TicketSelling.Core.csproj", "{49CF4160-1FC2-46E6-98EC-D5FC606DC068}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{31CE3D0D-160A-45F7-A98B-A2D1097A6710}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{31CE3D0D-160A-45F7-A98B-A2D1097A6710}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{31CE3D0D-160A-45F7-A98B-A2D1097A6710}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B79B787-920B-498E-8C26-9E85FB4B473B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B79B787-920B-498E-8C26-9E85FB4B473B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B79B787-920B-498E-8C26-9E85FB4B473B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B79B787-920B-498E-8C26-9E85FB4B473B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49CF4160-1FC2-46E6-98EC-D5FC606DC068}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49CF4160-1FC2-46E6-98EC-D5FC606DC068}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49CF4160-1FC2-46E6-98EC-D5FC606DC068}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49CF4160-1FC2-46E6-98EC-D5FC606DC068}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
