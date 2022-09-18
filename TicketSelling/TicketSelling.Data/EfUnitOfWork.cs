@@ -4,14 +4,22 @@ namespace TicketSelling.Data
 {
     public class EfUnitOfWork : IUnitOfWork
     {
-        public void Dispose()
+        private readonly TicketSellingContext _context;
+
+        public EfUnitOfWork(TicketSellingContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
         }
 
-        public Task SaveChanges()
+        public void Dispose()
         {
-            throw new NotImplementedException();
+            _context.Dispose();
+            GC.SuppressFinalize(this);
+        }
+
+        public async Task SaveChanges()
+        {
+            await _context.SaveChangesAsync();
         }
     }
 }
