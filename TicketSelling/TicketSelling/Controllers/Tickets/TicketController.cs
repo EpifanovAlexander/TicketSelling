@@ -1,7 +1,6 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using TicketSelling.Controllers.Tickets.Dto;
-using TicketSelling.Core.Domains.Tickets;
+using TicketSelling.Core.Domains.Tickets.Dto;
 using TicketSelling.Core.Domains.Tickets.Services;
 
 namespace TicketSelling.Controllers.Tickets
@@ -10,28 +9,24 @@ namespace TicketSelling.Controllers.Tickets
     [ApiController]
     [ApiVersion("1.0")]
     public class TicketController : ControllerBase
-    {
-        private readonly IMapper _mapper;
+    {    
         private readonly ITicketService _ticketService;
 
-        public TicketController(IMapper mapper, ITicketService ticketService)
+        public TicketController(ITicketService ticketService)
         {
-            _mapper = mapper;
             _ticketService = ticketService;
         }
 
         [HttpPost("sale/")]
-        public async Task Sale(SaleTicketDto model, CancellationToken cancellationToken)
+        public async Task Sale(SaleTicketDto saleTicketDto, CancellationToken cancellationToken)
         {
-            var saleTicket = _mapper.Map<SaleTicket>(model);
-            await _ticketService.SaleTicket(saleTicket, cancellationToken);
+            await _ticketService.SaleTicket(saleTicketDto, cancellationToken);
         }
 
         [HttpPost("refund/")]
-        public async Task Refund(RefundTicketDto model, CancellationToken cancellationToken)
+        public async Task Refund(RefundTicketDto refundTicketDto, CancellationToken cancellationToken)
         {
-            var refundTicket = _mapper.Map<RefundTicket>(model);
-            await _ticketService.RefundTicket(refundTicket, cancellationToken);
+            await _ticketService.RefundTicket(refundTicketDto, cancellationToken);
         }
     }
 }
