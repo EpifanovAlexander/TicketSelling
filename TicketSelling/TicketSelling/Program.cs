@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using TicketSelling.Core;
+using TicketSelling.Core.Mappers;
 using TicketSelling.Data;
-using TicketSelling.Mappers;
 
 var builder = WebApplication.CreateBuilder(args);
 
