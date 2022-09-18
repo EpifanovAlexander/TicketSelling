@@ -8,15 +8,15 @@ namespace TicketSelling.Core.Domains.Tickets.Dto
         public string OperationType { get; set; }
 
         [JsonPropertyName("operation_time")]
-        public DateTime OperationTime { get; set; }
+        public DateTimeOffset OperationTime { get; set; }
 
         [JsonPropertyName("operation_place")]
         public string OperationPlace { get; set; }
 
         [JsonPropertyName("ticket_number")]
-        public long TicketNumber { get; set; }
+        public string TicketNumber { get; set; }
 
-        public RefundTicketDto(string operationType, DateTime operationTime, string operationPlace, long ticketNumber)
+        public RefundTicketDto(string operationType, DateTimeOffset operationTime, string operationPlace, string ticketNumber)
         {
             OperationType = operationType;
             OperationTime = operationTime;

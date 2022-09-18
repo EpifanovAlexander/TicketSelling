@@ -5,9 +5,9 @@
         public string OperationType { get; set; }
         public DateTime OperationTime { get; set; }
         public string OperationPlace { get; set; }
-        public long TicketNumber { get; set; }
+        public string TicketNumber { get; set; }
 
-        public RefundTicket(string operationType, DateTime operationTime, string operationPlace, long ticketNumber)
+        public RefundTicket(string operationType, DateTime operationTime, string operationPlace, string ticketNumber)
         {
             OperationType = operationType;
             OperationTime = operationTime;

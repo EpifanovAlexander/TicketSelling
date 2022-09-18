@@ -14,19 +14,19 @@ namespace TicketSelling.Core.Domains.Segments.Dto
         public string DepartPlace { get; set; }
 
         [JsonPropertyName("depart_datetime")]
-        public DateTime DepartDatetime { get; set; }
+        public DateTimeOffset DepartDatetime { get; set; }
 
         [JsonPropertyName("arrive_place")]
         public string ArrivePlace { get; set; }
 
         [JsonPropertyName("arrive_datetime")]
-        public DateTime ArriveDatetime { get; set; }
+        public DateTimeOffset ArriveDatetime { get; set; }
 
         [JsonPropertyName("pnr_id")]
         public string PnrId { get; set; }
 
-        public SegmentDto(string airlineCode, int flightNumber, string departPlace, 
-            DateTime departDatetime, string arrivePlace, DateTime arriveDatetime, string pnrId)
+        public SegmentDto(string airlineCode, int flightNumber, string departPlace,
+            DateTimeOffset departDatetime, string arrivePlace, DateTimeOffset arriveDatetime, string pnrId)
         {
             AirlineCode = airlineCode;
             FlightNumber = flightNumber;

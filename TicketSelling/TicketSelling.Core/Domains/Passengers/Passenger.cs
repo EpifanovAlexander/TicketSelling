@@ -6,15 +6,15 @@
         public string Surname { get; set; }
         public string Patronymic { get; set; }
         public string DocumentType { get; set; }
-        public long DocumentNumber { get; set; }
+        public string DocumentNumber { get; set; }
         public DateTime Birthdate { get; set; }
         public char Gender { get; set; }
         public string PassengerType { get; set; }
-        public long TicketNumber { get; set; }
+        public string TicketNumber { get; set; }
         public int TicketType { get; set; }
 
-        public Passenger(string name, string surname, string patronymic, string documentType, long documentNumber,
-            DateTime birthdate, char gender, string passengerType, long ticketNumber, int ticketType)
+        public Passenger(string name, string surname, string patronymic, string documentType, string documentNumber,
+            DateTime birthdate, char gender, string passengerType, string ticketNumber, int ticketType)
         {
             Name = name;
             Surname = surname;

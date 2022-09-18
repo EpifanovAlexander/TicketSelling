@@ -5,13 +5,13 @@
         public string AirlineCode { get; set; }
         public int FlightNumber { get; set; }
         public string DepartPlace { get; set; }
-        public DateTime DepartDatetime { get; set; }
+        public DateTimeOffset DepartDatetime { get; set; }
         public string ArrivePlace { get; set; }
-        public DateTime ArriveDatetime { get; set; }
+        public DateTimeOffset ArriveDatetime { get; set; }
         public string PnrId { get; set; }
 
         public Segment(string airlineCode, int flightNumber, string departPlace,
-            DateTime departDatetime, string arrivePlace, DateTime arriveDatetime, string pnrId)
+            DateTimeOffset departDatetime, string arrivePlace, DateTimeOffset arriveDatetime, string pnrId)
         {
             AirlineCode = airlineCode;
             FlightNumber = flightNumber;

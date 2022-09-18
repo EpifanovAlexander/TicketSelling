@@ -17,7 +17,7 @@ namespace TicketSelling.Core.Domains.Passengers.Dto
         public string DocumentType { get; set; }
 
         [JsonPropertyName("doc_number")]
-        public long DocumentNumber { get; set; }
+        public string DocumentNumber { get; set; }
 
         [JsonPropertyName("birthdate")]
         public DateTime Birthdate { get; set; }
@@ -29,13 +29,13 @@ namespace TicketSelling.Core.Domains.Passengers.Dto
         public string PassengerType { get; set; }
 
         [JsonPropertyName("ticket_number")]
-        public long TicketNumber { get; set; }
+        public string TicketNumber { get; set; }
 
         [JsonPropertyName("ticket_type")]
         public int TicketType { get; set; }
 
-        public PassengerDto(string name, string surname, string patronymic, string documentType, long documentNumber, 
-            DateTime birthdate, char gender, string passengerType, long ticketNumber, int ticketType)
+        public PassengerDto(string name, string surname, string patronymic, string documentType, string documentNumber, 
+            DateTime birthdate, char gender, string passengerType, string ticketNumber, int ticketType)
         {
             Name = name;
             Surname = surname;

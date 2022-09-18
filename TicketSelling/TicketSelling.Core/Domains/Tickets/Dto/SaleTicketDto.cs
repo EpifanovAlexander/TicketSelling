@@ -10,7 +10,7 @@ namespace TicketSelling.Core.Domains.Tickets.Dto
         public string OperationType { get; set; }
 
         [JsonPropertyName("operation_time")]
-        public DateTime OperationTime { get; set; }
+        public DateTimeOffset OperationTime { get; set; }
 
         [JsonPropertyName("operation_place")]
         public string OperationPlace { get; set; }
@@ -21,7 +21,7 @@ namespace TicketSelling.Core.Domains.Tickets.Dto
         [JsonPropertyName("routes")]
         public IEnumerable<SegmentDto> Routes { get; set; }
 
-        public SaleTicketDto(string operationType, DateTime operationTime, string operationPlace, 
+        public SaleTicketDto(string operationType, DateTimeOffset operationTime, string operationPlace, 
             PassengerDto passenger, IEnumerable<SegmentDto> routes)
         {
             OperationType = operationType;
