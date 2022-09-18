@@ -1,4 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
+using TicketSelling.Core;
+using TicketSelling.Data;
+using TicketSelling.Mappers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +16,12 @@ builder.Services.AddApiVersioning(config =>
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddAutoMapper(typeof(MappingProfile));
+builder.Services
+    .AddData(builder.Configuration)
+    .AddCore();
+
 
 var app = builder.Build();
 
