@@ -1,4 +1,3 @@
-using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using TicketSelling.Core.Domains.Tickets.Dto;
 using TicketSelling.Core.Domains.Tickets.Services;
