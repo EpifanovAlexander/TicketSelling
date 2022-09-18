@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace TicketSelling.Controllers.Tickets.Dto
+namespace TicketSelling.Core.Domains.Segments.Dto
 {
     public class SegmentDto
     {
