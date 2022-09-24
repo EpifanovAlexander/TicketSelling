@@ -25,7 +25,7 @@ namespace TicketSelling.Core.ValidationAttributes
         {
             if (!validMethod.Invoke(passenger))
             {
-                ErrorMessage = message + Environment.NewLine;
+                ErrorMessage += message + ". ";
                 return false;
             }
             return true;
