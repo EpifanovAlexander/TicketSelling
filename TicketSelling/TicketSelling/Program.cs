@@ -38,6 +38,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseMiddleware<SizeRequestMiddleware>();
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
