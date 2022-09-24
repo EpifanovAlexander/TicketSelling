@@ -4,6 +4,7 @@ using TicketSelling.Core.Mappers;
 using TicketSelling.Data;
 using TicketSelling.Data.Mappers;
 using TicketSelling.HostedServices;
+using TicketSelling.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +28,8 @@ builder.Services
 
 
 var app = builder.Build();
+
+app.UseMiddleware<ExceptionMiddleware>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
