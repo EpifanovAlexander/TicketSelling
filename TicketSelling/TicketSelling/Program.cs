@@ -1,10 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
 using TicketSelling.Core;
 using TicketSelling.Core.Mappers;
+using TicketSelling.Core.Validators;
 using TicketSelling.Data;
 using TicketSelling.Data.Mappers;
 using TicketSelling.HostedServices;
 using TicketSelling.Middlewares;
+using TicketSelling.Validators;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +22,7 @@ builder.Services.AddApiVersioning(config =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddTransient<IJsonSchemaValidator, JsonSchemaValidator>();
 builder.Services.AddAutoMapper(typeof(MappingProfile), typeof(DbModelMappingProfile));
 builder.Services.AddHostedService<MigrationHostedService>();
 builder.Services
@@ -41,6 +44,8 @@ if (app.Environment.IsDevelopment())
 app.UseMiddleware<SizeRequestMiddleware>();
 
 app.UseHttpsRedirection();
+
+app.UseMiddleware<JsonSchemaValidationMiddleware>();
 
 app.UseAuthorization();
 
