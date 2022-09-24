@@ -15,6 +15,7 @@ namespace TicketSelling.Core.ValidationAttributes
             {
                 var result = true;
                 result &= CheckRuleForPassenger(IsAgeValid, passenger, $"Пассажир должен быть старше {VALID_AGE} лет");
+                result &= CheckRuleForPassenger(IsGenderValid, passenger, $"Пассажир имеет некорректный пол");
                 result &= CheckRuleForPassenger(IsDocumentValid, passenger, "Предъявлен невалидный документ");
                 return result;
             }
@@ -38,6 +39,11 @@ namespace TicketSelling.Core.ValidationAttributes
             var age = today.Year - birthDate.Year - 1 +
                 ((today.Month > birthDate.Month || today.Month == birthDate.Month && today.Day >= birthDate.Day) ? 1 : 0);
             return age >= VALID_AGE;
+        }
+
+        private bool IsGenderValid(PassengerDto passenger)
+        {
+            return passenger.Gender == 'M' || passenger.Gender == 'F';
         }
 
         private bool IsDocumentValid(PassengerDto passenger)
