@@ -15,7 +15,7 @@
         {
             if (httpContext.Request.Headers.ContentLength > REQUEST_SIZE_LIMIT)
             {
-                httpContext.Response.StatusCode = StatusCodes.Status411LengthRequired;
+                httpContext.Response.StatusCode = StatusCodes.Status413PayloadTooLarge;
                 await httpContext.Response.WriteAsJsonAsync(new { Message = "Недопустимая длина запроса" });
             }
             else 
