@@ -25,40 +25,41 @@ VALUES({0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10}, 'issued');";
 
         public async Task RefundSegmentsByTicketNumberAsync(string ticketNumber, CancellationToken token)
         {
-            int rowsAffected = _context.Database.ExecuteSqlRaw(SET_REFUND_STATE_QUERY, ticketNumber);
+            using var dbContextTransaction = await _context.Database.BeginTransactionAsync(System.Data.IsolationLevel.Serializable, token);
+            int rowsAffected = await _context.Database.ExecuteSqlRawAsync(SET_REFUND_STATE_QUERY, ticketNumber);
             if (rowsAffected == 0)
             {
+                await _context.Database.RollbackTransactionAsync(token);
                 throw new HttpResponseException(System.Net.HttpStatusCode.Conflict);
             }
             await _context.SaveChangesAsync(token);
+            await dbContextTransaction.CommitAsync(token);
         }
 
         public async Task SaleTicketAsync(SaleTicket ticket, CancellationToken token)
         {
-            using (var dbContextTransaction = _context.Database.BeginTransaction(System.Data.IsolationLevel.Serializable))
+            using var dbContextTransaction = await _context.Database.BeginTransactionAsync(System.Data.IsolationLevel.Serializable, token);
+            await _context.Database.ExecuteSqlRawAsync(SET_LOCK_TIMEOUT_QUERY, token);
+
+            int rowsAffected;
+            int serial_number = 1;
+
+            foreach (var segment in ticket.Routes)
             {
-                await _context.Database.ExecuteSqlRawAsync(SET_LOCK_TIMEOUT_QUERY, token);
+                var segmentDbModel = _mapper.Map<SegmentDbModel>(segment);
+                rowsAffected = await _context.Database.ExecuteSqlRawAsync(INSERT_INTO_SEGMENTS_QUERY, ticket.Passenger.TicketNumber, serial_number++, segmentDbModel.AirlineCode,
+                    segmentDbModel.FlightNumber, segmentDbModel.DepartPlace, segmentDbModel.DepartDatetime, segmentDbModel.DepartTimeZone,
+                    segmentDbModel.ArrivePlace, segmentDbModel.ArriveDatetime, segmentDbModel.ArriveTimeZone, segmentDbModel.PnrId);
 
-                int rowsAffected;
-                int serial_number = 1;
-
-                foreach (var segment in ticket.Routes)
+                if (rowsAffected == 0)
                 {
-                    var segmentDbModel = _mapper.Map<SegmentDbModel>(segment);
-                    rowsAffected = await _context.Database.ExecuteSqlRawAsync(INSERT_INTO_SEGMENTS_QUERY, ticket.Passenger.TicketNumber, serial_number++, segmentDbModel.AirlineCode,
-                        segmentDbModel.FlightNumber, segmentDbModel.DepartPlace, segmentDbModel.DepartDatetime, segmentDbModel.DepartTimeZone,
-                        segmentDbModel.ArrivePlace, segmentDbModel.ArriveDatetime, segmentDbModel.ArriveTimeZone, segmentDbModel.PnrId);
-
-                    if (rowsAffected == 0)
-                    {
-                        await _context.Database.RollbackTransactionAsync(token);
-                        throw new HttpResponseException(System.Net.HttpStatusCode.Conflict);
-                    }
+                    await _context.Database.RollbackTransactionAsync(token);
+                    throw new HttpResponseException(System.Net.HttpStatusCode.Conflict);
                 }
-
-                await _context.SaveChangesAsync(token);
-                await dbContextTransaction.CommitAsync(token);
             }
+
+            await _context.SaveChangesAsync(token);
+            await dbContextTransaction.CommitAsync(token);
         }
     }
 }
