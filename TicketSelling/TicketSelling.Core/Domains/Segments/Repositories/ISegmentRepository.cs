@@ -4,7 +4,7 @@ namespace TicketSelling.Core.Domains.Segments.Repositories
 {
     public interface ISegmentRepository
     {
-        Task SaleTicket(SaleTicket ticket, CancellationToken token);
-        Task RefundSegmentsByTicketNumber(string ticketNumber, CancellationToken token);
+        Task SaleTicketAsync(SaleTicket ticket, CancellationToken token);
+        Task RefundSegmentsByTicketNumberAsync(string ticketNumber, CancellationToken token);
     }
 }

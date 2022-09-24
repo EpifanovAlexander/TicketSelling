@@ -4,7 +4,7 @@ namespace TicketSelling.Core.Domains.Tickets.Services
 {
     public interface ITicketService
     {
-        Task SaleTicket(SaleTicketDto saleTicketDto, CancellationToken token);
-        Task RefundTicket(RefundTicketDto refundTicketDto, CancellationToken token);
+        Task SaleTicketAsync(SaleTicketDto saleTicketDto, CancellationToken token);
+        Task RefundTicketAsync(RefundTicketDto refundTicketDto, CancellationToken token);
     }
 }

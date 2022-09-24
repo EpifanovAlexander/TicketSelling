@@ -19,13 +19,13 @@ namespace TicketSelling.Controllers.Tickets
         [HttpPost("sale/")]
         public async Task Sale(SaleTicketDto saleTicketDto, CancellationToken cancellationToken)
         {
-            await _ticketService.SaleTicket(saleTicketDto, cancellationToken);
+            await _ticketService.SaleTicketAsync(saleTicketDto, cancellationToken);
         }
 
         [HttpPost("refund/")]
         public async Task Refund(RefundTicketDto refundTicketDto, CancellationToken cancellationToken)
         {
-            await _ticketService.RefundTicket(refundTicketDto, cancellationToken);
+            await _ticketService.RefundTicketAsync(refundTicketDto, cancellationToken);
         }
     }
 }

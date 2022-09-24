@@ -15,15 +15,15 @@ namespace TicketSelling.Core.Domains.Tickets.Services
             _segmentRepository = segmentRepository;
         }
 
-        public Task RefundTicket(RefundTicketDto refundTicketDto, CancellationToken token)
+        public async Task RefundTicketAsync(RefundTicketDto refundTicketDto, CancellationToken token)
         {
-            return _segmentRepository.RefundSegmentsByTicketNumber(refundTicketDto.TicketNumber, token);
+            await _segmentRepository.RefundSegmentsByTicketNumberAsync(refundTicketDto.TicketNumber, token);
         }
 
-        public Task SaleTicket(SaleTicketDto saleTicketDto, CancellationToken token)
+        public async Task SaleTicketAsync(SaleTicketDto saleTicketDto, CancellationToken token)
         {
             var saleTicket = _mapper.Map<SaleTicket>(saleTicketDto);
-            return _segmentRepository.SaleTicket(saleTicket, token);
+            await _segmentRepository.SaleTicketAsync(saleTicket, token);
         }
     }
 }

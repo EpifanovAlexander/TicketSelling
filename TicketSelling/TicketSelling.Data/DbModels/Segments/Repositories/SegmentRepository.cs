@@ -23,17 +23,17 @@ VALUES({0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10}, 'issued');";
             _context = context;
         }
 
-        public Task RefundSegmentsByTicketNumber(string ticketNumber, CancellationToken token)
+        public async Task RefundSegmentsByTicketNumberAsync(string ticketNumber, CancellationToken token)
         {
             int rowsAffected = _context.Database.ExecuteSqlRaw(SET_REFUND_STATE_QUERY, ticketNumber);
             if (rowsAffected == 0)
             {
                 throw new HttpResponseException(System.Net.HttpStatusCode.Conflict);
             }
-            return _context.SaveChangesAsync(token);
+            await _context.SaveChangesAsync(token);
         }
 
-        public async Task SaleTicket(SaleTicket ticket, CancellationToken token)
+        public async Task SaleTicketAsync(SaleTicket ticket, CancellationToken token)
         {
             using (var dbContextTransaction = _context.Database.BeginTransaction(System.Data.IsolationLevel.Serializable))
             {
