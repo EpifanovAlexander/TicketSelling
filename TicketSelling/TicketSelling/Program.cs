@@ -42,10 +42,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseMiddleware<SizeRequestMiddleware>();
+app.UseMiddleware<JsonSchemaValidationMiddleware>();
 
 app.UseHttpsRedirection();
-
-app.UseMiddleware<JsonSchemaValidationMiddleware>();
 
 app.UseAuthorization();
 
