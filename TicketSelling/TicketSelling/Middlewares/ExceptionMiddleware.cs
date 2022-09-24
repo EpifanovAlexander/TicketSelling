@@ -1,4 +1,5 @@
-﻿using System.Web.Http;
+﻿using Npgsql;
+using System.Data.Entity.Core;
 
 namespace TicketSelling.Middlewares
 {
@@ -17,32 +18,35 @@ namespace TicketSelling.Middlewares
             {
                 await next(httpContext);
             }
-            catch (HttpResponseException httpException)
+
+            catch (EntityException entityException)
             {
-                httpContext.Response.StatusCode = (int)httpException.Response.StatusCode;
+                Console.WriteLine($"Ошибка Entity: {entityException.Message}");
+                httpContext.Response.StatusCode = StatusCodes.Status409Conflict;
                 await httpContext.Response.WriteAsJsonAsync(new { Message = "Запрос не может быть выполнен из-за конфликта на сервере" });
             }
-            catch (Npgsql.PostgresException exception)
+
+            catch (PostgresException exception)
             {
                 int httpStatusCode = StatusCodes.Status500InternalServerError;
                 string message = "Внутренняя ошибка сервера";
 
                 switch (exception.SqlState)
                 {
-                    case Npgsql.PostgresErrorCodes.UniqueViolation:
+                    case PostgresErrorCodes.UniqueViolation:
                         httpStatusCode = StatusCodes.Status409Conflict;
                         message = "Запрос не может быть выполнен из-за конфликта на сервере";
                         break;
-                    case Npgsql.PostgresErrorCodes.SerializationFailure:
+                    case PostgresErrorCodes.SerializationFailure:
                         httpStatusCode = StatusCodes.Status408RequestTimeout;
                         message = "Время ожидания запроса истекло. Повторите попытку позднее";
                         break;
                 }
-
                 Console.WriteLine($"Ошибка Postgres: {exception.SqlState}. {exception.Message}");
                 httpContext.Response.StatusCode = httpStatusCode;
                 await httpContext.Response.WriteAsJsonAsync(new { Message = message });
             }
+
             catch (Exception exception)
             {
                 httpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;

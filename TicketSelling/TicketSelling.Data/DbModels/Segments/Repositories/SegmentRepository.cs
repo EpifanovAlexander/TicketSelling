@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using System.Web.Http;
+using System.Data.Entity.Core;
 using TicketSelling.Core.Domains.Segments.Repositories;
 using TicketSelling.Core.Domains.Tickets;
 
@@ -30,7 +30,7 @@ VALUES({0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10}, 'issued');";
             if (rowsAffected == 0)
             {
                 await _context.Database.RollbackTransactionAsync(token);
-                throw new HttpResponseException(System.Net.HttpStatusCode.Conflict);
+                throw new EntityException("Произошёл конфликт при обновлении данных");
             }
             await _context.SaveChangesAsync(token);
             await dbContextTransaction.CommitAsync(token);
@@ -54,7 +54,7 @@ VALUES({0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10}, 'issued');";
                 if (rowsAffected == 0)
                 {
                     await _context.Database.RollbackTransactionAsync(token);
-                    throw new HttpResponseException(System.Net.HttpStatusCode.Conflict);
+                    throw new EntityException("Произошёл конфликт при добавлении данных");
                 }
             }
 
