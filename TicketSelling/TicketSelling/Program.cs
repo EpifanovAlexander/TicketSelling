@@ -9,6 +9,11 @@ using TicketSelling.Middlewares;
 using TicketSelling.Validators;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.WebHost.ConfigureKestrel(c =>
+{
+    c.Limits.KeepAliveTimeout = TimeSpan.FromMinutes(2);
+    c.Limits.RequestHeadersTimeout = TimeSpan.FromMinutes(2);
+});
 
 // Add services to the container.
 
