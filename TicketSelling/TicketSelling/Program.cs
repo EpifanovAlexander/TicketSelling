@@ -14,6 +14,7 @@ builder.WebHost.ConfigureKestrel(c =>
     c.Limits.KeepAliveTimeout = TimeSpan.FromMinutes(2);
     c.Limits.RequestHeadersTimeout = TimeSpan.FromMinutes(2);
 });
+builder.WebHost.UseKestrel();
 
 // Add services to the container.
 
