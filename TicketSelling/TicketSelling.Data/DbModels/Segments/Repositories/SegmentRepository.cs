@@ -30,7 +30,8 @@ VALUES({0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10}, 'issued');";
             if (rowsAffected == 0)
             {
                 await _context.Database.RollbackTransactionAsync(token);
-                throw new EntityException("Произошёл конфликт при обновлении данных");
+                await Task.FromException(new EntityException("Произошёл конфликт при обновлении данных"));
+                return;
             }
             await _context.SaveChangesAsync(token);
             await dbContextTransaction.CommitAsync(token);
@@ -54,7 +55,8 @@ VALUES({0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10}, 'issued');";
                 if (rowsAffected == 0)
                 {
                     await _context.Database.RollbackTransactionAsync(token);
-                    throw new EntityException("Произошёл конфликт при добавлении данных");
+                    await Task.FromException(new EntityException("Произошёл конфликт при обновлении данных"));
+                    return;
                 }
             }
 
