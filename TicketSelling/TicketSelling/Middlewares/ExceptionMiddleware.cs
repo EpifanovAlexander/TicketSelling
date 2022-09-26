@@ -47,6 +47,13 @@ namespace TicketSelling.Middlewares
                 await httpContext.Response.WriteAsJsonAsync(new { Message = message });
             }
 
+            catch (TimeoutException timeoutException)
+            {
+                httpContext.Response.StatusCode = StatusCodes.Status408RequestTimeout;
+                Console.WriteLine("Время ожидания запроса истекло. " + timeoutException.Message);
+                await httpContext.Response.WriteAsJsonAsync(new { Message = "Время ожидания запроса истекло" });
+            }
+
             catch (Exception exception)
             {
                 httpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;
