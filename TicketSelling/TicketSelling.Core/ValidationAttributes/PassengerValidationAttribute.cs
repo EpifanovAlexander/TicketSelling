@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.RegularExpressions;
 using TicketSelling.Core.Domains.Passengers.Dto;
 
 namespace TicketSelling.Core.ValidationAttributes
@@ -17,9 +18,16 @@ namespace TicketSelling.Core.ValidationAttributes
                 result &= CheckRuleForPassenger(IsAgeValid, passenger, $"Пассажир должен быть старше {VALID_AGE} лет");
                 result &= CheckRuleForPassenger(IsGenderValid, passenger, $"Пассажир имеет некорректный пол");
                 result &= CheckRuleForPassenger(IsDocumentValid, passenger, "Предъявлен невалидный документ");
+                result &= CheckRuleForPassenger(IsTicketNumberValid, passenger, "Предъявлен билет с невалидным номером");
+                result &= CheckRuleForPassenger(IsRequiredPropertiesNotNull, passenger);
                 return result;
             }
             return false;
+        }
+
+        private bool CheckRuleForPassenger(IsPropertyValidDelegate validMethod, PassengerDto passenger)
+        {
+            return validMethod.Invoke(passenger);
         }
 
         private bool CheckRuleForPassenger(IsPropertyValidDelegate validMethod, PassengerDto passenger, string message)
@@ -57,6 +65,34 @@ namespace TicketSelling.Core.ValidationAttributes
                     if (!char.IsDigit(item))
                         return false;
                 }
+            }
+            return true;
+        }
+        private bool IsTicketNumberValid(PassengerDto passenger)
+        {
+            Regex regex = new Regex(@"^(\d{13})$");
+            return regex.IsMatch(passenger.TicketNumber);
+        }
+
+        private bool IsRequiredPropertiesNotNull(PassengerDto passenger)
+        {
+            var result = true;
+            result &= CheckRequiredProperty(passenger.Name, "Имя пассажира не может быть пустым");
+            result &= CheckRequiredProperty(passenger.Surname, "Фамилия пассажира не может быть пустой");
+            result &= CheckRequiredProperty(passenger.DocumentType, "Тип документа должен быть определён");
+            result &= CheckRequiredProperty(passenger.DocumentNumber, "Номер документа должен быть определён");
+            result &= CheckRequiredProperty(passenger.Birthdate, "Дата рождения пассажира не может быть пустой");
+            result &= CheckRequiredProperty(passenger.TicketNumber, "Номер билета должен быть определён");
+            result &= CheckRequiredProperty(passenger.TicketType, "Тип билета должен быть определён");
+            return result;
+        }
+
+        private bool CheckRequiredProperty<T>(T property, string message)
+        {
+            if (property is null)
+            {
+                ErrorMessage += message + ". ";
+                return false;
             }
             return true;
         }
