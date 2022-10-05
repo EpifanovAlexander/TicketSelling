@@ -9,21 +9,21 @@ namespace TicketSelling.Core.Domains.Tickets.Dto
     {
         [Required(ErrorMessage = "Тип операции должен быть определён")]
         [JsonPropertyName("operation_type")]
-        public string OperationType { get; set; }
+        public string OperationType { get; private set; }
 
         [JsonPropertyName("operation_time")]
-        public DateTimeOffset OperationTime { get; set; }
+        public DateTimeOffset OperationTime { get; private set; }
 
         [JsonPropertyName("operation_place")]
-        public string OperationPlace { get; set; }
+        public string OperationPlace { get; private set; }
 
         [Required(ErrorMessage = "У билета должен быть пассажир")]
         [JsonPropertyName("passenger")]
-        public PassengerDto Passenger { get; set; }
+        public PassengerDto Passenger { get; private set; }
 
         [Required(ErrorMessage = "В билете должен быть хотя бы один сегмент маршрута")]
         [JsonPropertyName("routes")]
-        public IEnumerable<SegmentDto> Routes { get; set; }
+        public IEnumerable<SegmentDto> Routes { get; private set; }
 
         public SaleTicketDto(string operationType, DateTimeOffset operationTime, string operationPlace, 
             PassengerDto passenger, IEnumerable<SegmentDto> routes)

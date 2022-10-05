@@ -7,18 +7,18 @@ namespace TicketSelling.Core.Domains.Tickets.Dto
     {
         [Required(ErrorMessage = "Тип операции должен быть определён")]
         [JsonPropertyName("operation_type")]
-        public string OperationType { get; set; }
+        public string OperationType { get; private set; }
 
         [JsonPropertyName("operation_time")]
-        public DateTimeOffset OperationTime { get; set; }
+        public DateTimeOffset OperationTime { get; private set; }
 
         [JsonPropertyName("operation_place")]
-        public string OperationPlace { get; set; }
+        public string OperationPlace { get; private set; }
 
         [Required(ErrorMessage = "Номер билета должен быть определён")]
         [RegularExpression(@"^(\d{13})$", ErrorMessage = "Невалидный номер билета")]
         [JsonPropertyName("ticket_number")]
-        public string TicketNumber { get; set; }
+        public string TicketNumber { get; private set; }
 
         public RefundTicketDto(string operationType, DateTimeOffset operationTime, string operationPlace, string ticketNumber)
         {

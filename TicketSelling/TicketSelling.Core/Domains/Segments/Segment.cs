@@ -2,13 +2,13 @@
 {
     public class Segment
     {
-        public string AirlineCode { get; set; }
-        public int FlightNumber { get; set; }
-        public string DepartPlace { get; set; }
-        public DateTimeOffset DepartDatetime { get; set; }
-        public string ArrivePlace { get; set; }
-        public DateTimeOffset ArriveDatetime { get; set; }
-        public string PnrId { get; set; }
+        public string AirlineCode { get; private set; }
+        public int FlightNumber { get; private set; }
+        public string DepartPlace { get; private set; }
+        public DateTimeOffset DepartDatetime { get; private set; }
+        public string ArrivePlace { get; private set; }
+        public DateTimeOffset ArriveDatetime { get; private set; }
+        public string PnrId { get; private set; }
 
         public Segment(string airlineCode, int flightNumber, string departPlace,
             DateTimeOffset departDatetime, string arrivePlace, DateTimeOffset arriveDatetime, string pnrId)

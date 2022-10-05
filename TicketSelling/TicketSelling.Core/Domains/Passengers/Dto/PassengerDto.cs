@@ -9,41 +9,41 @@ namespace TicketSelling.Core.Domains.Passengers.Dto
     {
         [Required(ErrorMessage = "Имя пассажира не может быть пустым")]
         [JsonPropertyName("name")]
-        public string Name { get; set; }
+        public string Name { get; private set; }
 
         [Required(ErrorMessage = "Фамилия пассажира не может быть пустой")]
         [JsonPropertyName("surname")]
-        public string Surname { get; set; }
+        public string Surname { get; private set; }
 
         [JsonPropertyName("patronymic")]
-        public string Patronymic { get; set; }
+        public string Patronymic { get; private set; }
 
         [Required(ErrorMessage = "Тип документа должен быть определён")]
         [JsonPropertyName("doc_type")]
-        public string DocumentType { get; set; }
+        public string DocumentType { get; private set; }
 
         [Required(ErrorMessage = "Номер документа должен быть определён")]
         [JsonPropertyName("doc_number")]
-        public string DocumentNumber { get; set; }
+        public string DocumentNumber { get; private set; }
 
         [Required(ErrorMessage = "Дата рождения пассажира не может быть пустой")]
         [JsonPropertyName("birthdate")]
-        public DateTime Birthdate { get; set; }
+        public DateTime Birthdate { get; private set; }
 
         [JsonPropertyName("gender")]
-        public char Gender { get; set; }
+        public char Gender { get; private set; }
 
         [JsonPropertyName("passenger_type")]
-        public string PassengerType { get; set; }
+        public string PassengerType { get; private set; }
 
         [Required(ErrorMessage = "Номер билета должен быть определён")]
         [RegularExpression(@"^(\d{13})$", ErrorMessage = "Невалидный номер билета")]
         [JsonPropertyName("ticket_number")]
-        public string TicketNumber { get; set; }
+        public string TicketNumber { get; private set; }
 
         [Required(ErrorMessage = "Тип билета должен быть определён")]
         [JsonPropertyName("ticket_type")]
-        public int TicketType { get; set; }
+        public int TicketType { get; private set; }
 
         public PassengerDto(string name, string surname, string patronymic, string documentType, string documentNumber, 
             DateTime birthdate, char gender, string passengerType, string ticketNumber, int ticketType)

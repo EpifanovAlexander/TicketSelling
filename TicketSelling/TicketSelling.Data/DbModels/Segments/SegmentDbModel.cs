@@ -5,18 +5,18 @@ namespace TicketSelling.Data.DbModels.Segments
 {
     public class SegmentDbModel
     {
-        public string TicketNumber { get; set; }
-        public int SerialNumber { get; set; }
-        public string AirlineCode { get; set; }
-        public int FlightNumber { get; set; }
-        public string DepartPlace { get; set; }
-        public DateTimeOffset DepartDatetime { get; set; }
+        public string TicketNumber { get; private set; }
+        public int SerialNumber { get; private set; }
+        public string AirlineCode { get; private set; }
+        public int FlightNumber { get; private set; }
+        public string DepartPlace { get; private set; }
+        public DateTimeOffset DepartDatetime { get; private set; }
         public short DepartTimeZone { get; private set; }
-        public string ArrivePlace { get; set; }
+        public string ArrivePlace { get; private set; }
         public DateTimeOffset ArriveDatetime { get; set; }
         public short ArriveTimeZone { get; private set; }
-        public string PnrId { get; set; }
-        public string State { get; set; }
+        public string PnrId { get; private set; }
+        public string State { get; private set; }
 
         public SegmentDbModel(string airlineCode, int flightNumber, string departPlace,
             DateTimeOffset departDatetime, string arrivePlace, DateTimeOffset arriveDatetime, string pnrId)

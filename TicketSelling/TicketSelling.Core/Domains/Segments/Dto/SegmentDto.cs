@@ -7,31 +7,31 @@ namespace TicketSelling.Core.Domains.Segments.Dto
     {
         [Required(ErrorMessage = "Поле \"airline_code\" было не определено")]
         [JsonPropertyName("airline_code")]
-        public string AirlineCode { get; set; }
+        public string AirlineCode { get; private set; }
 
         [Required(ErrorMessage = "Поле \"flight_num\" было не определено")]
         [JsonPropertyName("flight_num")]
-        public int FlightNumber { get; set; }
+        public int FlightNumber { get; private set; }
 
         [Required(ErrorMessage = "Поле \"depart_place\" было не определено")]
         [JsonPropertyName("depart_place")]
-        public string DepartPlace { get; set; }
+        public string DepartPlace { get; private set; }
 
         [Required(ErrorMessage = "Поле \"depart_datetime\" было не определено")]
         [JsonPropertyName("depart_datetime")]
-        public DateTimeOffset DepartDatetime { get; set; }
+        public DateTimeOffset DepartDatetime { get; private set; }
 
         [Required(ErrorMessage = "Поле \"arrive_place\" было не определено")]
         [JsonPropertyName("arrive_place")]
-        public string ArrivePlace { get; set; }
+        public string ArrivePlace { get; private set; }
 
         [Required(ErrorMessage = "Поле \"arrive_datetime\" было не определено")]
         [JsonPropertyName("arrive_datetime")]
-        public DateTimeOffset ArriveDatetime { get; set; }
+        public DateTimeOffset ArriveDatetime { get; private set; }
 
         [Required(ErrorMessage = "Поле \"pnr_id\" было не определено")]
         [JsonPropertyName("pnr_id")]
-        public string PnrId { get; set; }
+        public string PnrId { get; private set; }
 
         public SegmentDto(string airlineCode, int flightNumber, string departPlace,
             DateTimeOffset departDatetime, string arrivePlace, DateTimeOffset arriveDatetime, string pnrId)

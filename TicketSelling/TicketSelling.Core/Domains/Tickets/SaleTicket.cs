@@ -5,11 +5,11 @@ namespace TicketSelling.Core.Domains.Tickets
 {
     public class SaleTicket
     {
-        public string OperationType { get; set; }
-        public DateTimeOffset OperationTime { get; set; }
-        public string OperationPlace { get; set; }
-        public Passenger Passenger { get; set; }
-        public IEnumerable<Segment> Routes { get; set; }
+        public string OperationType { get; private set; }
+        public DateTimeOffset OperationTime { get; private set; }
+        public string OperationPlace { get; private set; }
+        public Passenger Passenger { get; private set; }
+        public IEnumerable<Segment> Routes { get; private set; }
 
         public SaleTicket(string operationType, DateTimeOffset operationTime, string operationPlace,
             Passenger passenger, IEnumerable<Segment> routes)
