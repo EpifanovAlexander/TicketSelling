@@ -7,7 +7,7 @@ namespace TicketSelling.Validators
     public class JsonSchemaValidator: IJsonSchemaValidator
     {
         private readonly string json_schemas_folder = Path.Combine(Environment.CurrentDirectory, "JsonSchemes");
-        public async Task<bool> IsValidAsync(string jsonContent, string jsonSchemaName) 
+        public bool IsValid(string jsonContent, string jsonSchemaName) 
         {
             string jsonSchemaPath = Path.Combine(json_schemas_folder, $"{jsonSchemaName}.json");
             if (string.IsNullOrWhiteSpace(jsonContent) || string.IsNullOrWhiteSpace(jsonSchemaName) 
@@ -16,7 +16,7 @@ namespace TicketSelling.Validators
                 return false;
             }
 
-            string jsonSchema = await File.ReadAllTextAsync(jsonSchemaPath);
+            string jsonSchema = File.ReadAllText(jsonSchemaPath);
             JSchema schema = JSchema.Parse(jsonSchema); 
             JObject content = JObject.Parse(jsonContent);
 

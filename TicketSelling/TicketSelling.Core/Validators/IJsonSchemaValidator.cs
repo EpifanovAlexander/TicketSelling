@@ -2,6 +2,6 @@
 {
     public interface IJsonSchemaValidator
     {
-        Task<bool> IsValidAsync(string content, string jsonSchemaName);
+        bool IsValid(string content, string jsonSchemaName);
     }
 }

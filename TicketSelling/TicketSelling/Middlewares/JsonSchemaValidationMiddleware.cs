@@ -29,7 +29,7 @@ namespace TicketSelling.Middlewares
                 jsonSchemaName = requestPath.Substring(requestPath.LastIndexOf('/') + 1);
             }
 
-            bool isContentValid = await _jsonSchemaValidator.IsValidAsync(content, jsonSchemaName);
+            bool isContentValid = _jsonSchemaValidator.IsValid(content, jsonSchemaName);
             if (isContentValid)
             {
                 await next(httpContext);
