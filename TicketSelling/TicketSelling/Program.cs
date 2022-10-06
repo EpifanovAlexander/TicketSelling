@@ -31,6 +31,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<IJsonSchemaValidator, JsonSchemaValidator>();
 builder.Services.AddAutoMapper(typeof(MappingProfile), typeof(DbModelMappingProfile));
 builder.Services.AddHostedService<MigrationHostedService>();
+builder.Services.AddMemoryCache();
 builder.Services
     .AddData(builder.Configuration)
     .AddCore();
