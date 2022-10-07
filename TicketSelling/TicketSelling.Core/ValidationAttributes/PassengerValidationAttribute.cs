@@ -15,11 +15,11 @@ namespace TicketSelling.Core.ValidationAttributes
             if (value is PassengerDto passenger)
             {
                 var result = true;
+                result &= CheckRuleForPassenger(IsRequiredPropertiesNotNull, passenger);
                 result &= CheckRuleForPassenger(IsAgeValid, passenger, $"Пассажир должен быть старше {VALID_AGE} лет");
                 result &= CheckRuleForPassenger(IsGenderValid, passenger, $"Пассажир имеет некорректный пол");
                 result &= CheckRuleForPassenger(IsDocumentValid, passenger, "Предъявлен невалидный документ");
                 result &= CheckRuleForPassenger(IsTicketNumberValid, passenger, "Предъявлен билет с невалидным номером");
-                result &= CheckRuleForPassenger(IsRequiredPropertiesNotNull, passenger);
                 return result;
             }
             return false;
@@ -58,7 +58,7 @@ namespace TicketSelling.Core.ValidationAttributes
         {
             if (passenger.DocumentType == "00")
             {
-                if (passenger.DocumentNumber.Length != 10)
+                if (passenger.DocumentNumber is null || passenger.DocumentNumber.Length != 10)
                     return false;
                 foreach (var item in passenger.DocumentNumber)
                 {
@@ -71,6 +71,8 @@ namespace TicketSelling.Core.ValidationAttributes
         private bool IsTicketNumberValid(PassengerDto passenger)
         {
             Regex regex = new Regex(@"^(\d{13})$");
+            if (passenger.TicketNumber == null)
+                return false;
             return regex.IsMatch(passenger.TicketNumber);
         }
 
