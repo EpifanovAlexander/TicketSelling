@@ -1,6 +1,7 @@
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using TicketSelling.Core.Domains.Tickets.Dto;
-using TicketSelling.Core.Domains.Tickets.Services;
+using TicketSelling.Core.Domains.Tickets.Commands.RefundTicketCommands;
+using TicketSelling.Core.Domains.Tickets.Commands.SaleTicketCommands;
 
 namespace TicketSelling.Controllers.Tickets
 {
@@ -11,11 +12,11 @@ namespace TicketSelling.Controllers.Tickets
     {
         private const int REQUEST_TIMEOUT = 120 * 1000;
 
-        private readonly ITicketService _ticketService;
+        private readonly IMediator _mediator;
 
-        public TicketController(ITicketService ticketService)
+        public TicketController(IMediator mediator)
         {
-            _ticketService = ticketService;
+            _mediator = mediator;
         }
 
         private async Task Timeout()
@@ -41,15 +42,15 @@ namespace TicketSelling.Controllers.Tickets
         }
 
         [HttpPost("sale/")]
-        public async Task Sale(SaleTicketDto saleTicketDto, CancellationToken cancellationToken)
+        public async Task Sale([FromBody] SaleTicketCommand saleTicketCommand, CancellationToken cancellationToken)
         {
-            await RunWithTimeout(_ticketService.SaleTicketAsync, saleTicketDto, cancellationToken);
+            await RunWithTimeout(_mediator.Send, saleTicketCommand, cancellationToken);
         }
 
         [HttpPost("refund/")]
-        public async Task Refund(RefundTicketDto refundTicketDto, CancellationToken cancellationToken)
+        public async Task Refund([FromBody] RefundTicketCommand refundTicketCommand, CancellationToken cancellationToken)
         {
-            await RunWithTimeout(_ticketService.RefundTicketAsync, refundTicketDto, cancellationToken);
+            await RunWithTimeout(_mediator.Send, refundTicketCommand, cancellationToken);
         }
     }
 }
