@@ -4,7 +4,8 @@ using TicketSelling.Core.Domains.Passengers.Dto;
 using TicketSelling.Core.Domains.Segments;
 using TicketSelling.Core.Domains.Segments.Dto;
 using TicketSelling.Core.Domains.Tickets;
-using TicketSelling.Core.Domains.Tickets.Dto;
+using TicketSelling.Core.Domains.Tickets.Commands.RefundTicketCommands;
+using TicketSelling.Core.Domains.Tickets.Commands.SaleTicketCommands;
 
 namespace TicketSelling.Core.Mappers
 {
@@ -13,8 +14,8 @@ namespace TicketSelling.Core.Mappers
         public MappingProfile()
         {
             CreateMap<PassengerDto, Passenger>();
-            CreateMap<RefundTicketDto, RefundTicket>();
-            CreateMap<SaleTicketDto, SaleTicket>();
+            CreateMap<RefundTicketCommand, RefundTicket>();
+            CreateMap<SaleTicketCommand, SaleTicket>();
             CreateMap<SegmentDto, Segment>();
         }
     }
