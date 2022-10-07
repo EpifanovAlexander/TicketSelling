@@ -1,19 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using TicketSelling.Core.Domains.Tickets.Dto;
+using TicketSelling.Core.Domains.Tickets.Commands.RefundTicketCommands;
 using Xunit;
 
 namespace TicketSelling.Core.Tests.ValidationAttributesTests
 {
-    public class RefundTicketDtoTests
+    public class RefundTicketCommandTests
     {
         [Fact]
         public void TicketWithIncorrectOperation_ReturnFalse()
         {
             // ARRANGE
             var results = new List<ValidationResult>();
-            var ticketWithIncorrectOperation = new RefundTicketDto(null, DateTimeOffset.Now, "Aeroport", "5552139265672");
+            var ticketWithIncorrectOperation = new RefundTicketCommand(null, DateTimeOffset.Now, "Aeroport", "5552139265672");
             var context = new ValidationContext(ticketWithIncorrectOperation);
 
             // ACT
@@ -28,7 +28,7 @@ namespace TicketSelling.Core.Tests.ValidationAttributesTests
         {
             // ARRANGE
             var results = new List<ValidationResult>();
-            var ticketWithoutNumber = new RefundTicketDto("refund", DateTimeOffset.Now, "Aeroport", null);
+            var ticketWithoutNumber = new RefundTicketCommand("refund", DateTimeOffset.Now, "Aeroport", null);
             var context = new ValidationContext(ticketWithoutNumber);
 
             // ACT
@@ -43,7 +43,7 @@ namespace TicketSelling.Core.Tests.ValidationAttributesTests
         {
             // ARRANGE
             var results = new List<ValidationResult>();
-            var ticketWithTooLongNumber = new RefundTicketDto("refund", DateTimeOffset.Now, "Aeroport", "too_long_ticket_number");
+            var ticketWithTooLongNumber = new RefundTicketCommand("refund", DateTimeOffset.Now, "Aeroport", "too_long_ticket_number");
             var context = new ValidationContext(ticketWithTooLongNumber);
 
             // ACT
@@ -58,7 +58,7 @@ namespace TicketSelling.Core.Tests.ValidationAttributesTests
         {
             // ARRANGE
             var results = new List<ValidationResult>();
-            var ticketWithTooSmallNumber = new RefundTicketDto("refund", DateTimeOffset.Now, "Aeroport", "2");
+            var ticketWithTooSmallNumber = new RefundTicketCommand("refund", DateTimeOffset.Now, "Aeroport", "2");
             var context = new ValidationContext(ticketWithTooSmallNumber);
 
             // ACT
@@ -73,7 +73,7 @@ namespace TicketSelling.Core.Tests.ValidationAttributesTests
         {
             // ARRANGE
             var results = new List<ValidationResult>();
-            var ticketWithLetters = new RefundTicketDto("refund", DateTimeOffset.Now, "Aeroport", "5552139W65672");
+            var ticketWithLetters = new RefundTicketCommand("refund", DateTimeOffset.Now, "Aeroport", "5552139W65672");
             var context = new ValidationContext(ticketWithLetters);
 
             // ACT
@@ -88,7 +88,7 @@ namespace TicketSelling.Core.Tests.ValidationAttributesTests
         {
             // ARRANGE
             var results = new List<ValidationResult>();
-            var ticketWithLetters = new RefundTicketDto("refund", DateTimeOffset.Now, "Aeroport", "5552139765672");
+            var ticketWithLetters = new RefundTicketCommand("refund", DateTimeOffset.Now, "Aeroport", "5552139765672");
             var context = new ValidationContext(ticketWithLetters);
 
             // ACT

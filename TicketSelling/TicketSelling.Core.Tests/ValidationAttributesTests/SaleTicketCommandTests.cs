@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using TicketSelling.Core.Domains.Passengers.Dto;
 using TicketSelling.Core.Domains.Segments.Dto;
-using TicketSelling.Core.Domains.Tickets.Dto;
+using TicketSelling.Core.Domains.Tickets.Commands.SaleTicketCommands;
 using Xunit;
 
 namespace TicketSelling.Core.Tests.ValidationAttributesTests
 {
-    public class SaleTicketDtoTests
+    public class SaleTicketCommandTests
     {
         [Fact]
         public void TicketWithIncorrectOperation_ReturnFalse()
@@ -20,7 +20,7 @@ namespace TicketSelling.Core.Tests.ValidationAttributesTests
             var correctRoutes = new List<SegmentDto>() { correctSegment };
 
             var results = new List<ValidationResult>();
-            var ticketWithIncorrectOperation = new SaleTicketDto(null, DateTimeOffset.Now, "Aeroport", correctPassenger, correctRoutes);
+            var ticketWithIncorrectOperation = new SaleTicketCommand(null, DateTimeOffset.Now, "Aeroport", correctPassenger, correctRoutes);
             var context = new ValidationContext(ticketWithIncorrectOperation);
 
             // ACT
@@ -38,7 +38,7 @@ namespace TicketSelling.Core.Tests.ValidationAttributesTests
             var correctRoutes = new List<SegmentDto>() { correctSegment };
 
             var results = new List<ValidationResult>();
-            var ticketWithoutPassenger = new SaleTicketDto("sale", DateTimeOffset.Now, "Aeroport", null, correctRoutes);
+            var ticketWithoutPassenger = new SaleTicketCommand("sale", DateTimeOffset.Now, "Aeroport", null, correctRoutes);
             var context = new ValidationContext(ticketWithoutPassenger);
 
             // ACT
@@ -56,7 +56,7 @@ namespace TicketSelling.Core.Tests.ValidationAttributesTests
                     DateTime.Parse("2001-07-12"), 'M', "type", "5552139265672", 1);
 
             var results = new List<ValidationResult>();
-            var ticketWithoutRoutes = new SaleTicketDto("sale", DateTimeOffset.Now, "Aeroport", correctPassenger, null);
+            var ticketWithoutRoutes = new SaleTicketCommand("sale", DateTimeOffset.Now, "Aeroport", correctPassenger, null);
             var context = new ValidationContext(ticketWithoutRoutes);
 
             // ACT
@@ -76,7 +76,7 @@ namespace TicketSelling.Core.Tests.ValidationAttributesTests
             var correctRoutes = new List<SegmentDto>() { correctSegment };
 
             var results = new List<ValidationResult>();
-            var ticketWithIncorrectOperation = new SaleTicketDto("sale", DateTimeOffset.Now, "Aeroport", correctPassenger, correctRoutes);
+            var ticketWithIncorrectOperation = new SaleTicketCommand("sale", DateTimeOffset.Now, "Aeroport", correctPassenger, correctRoutes);
             var context = new ValidationContext(ticketWithIncorrectOperation);
 
             // ACT
