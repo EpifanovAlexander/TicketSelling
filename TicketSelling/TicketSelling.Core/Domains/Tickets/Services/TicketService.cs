@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
-using TicketSelling.Core.Domains.Tickets.Dto;
+using TicketSelling.Core.Domains.Tickets.Commands.RefundTicketCommands;
+using TicketSelling.Core.Domains.Tickets.Commands.SaleTicketCommands;
 
 namespace TicketSelling.Core.Domains.Tickets.Services
 {
@@ -14,14 +15,14 @@ namespace TicketSelling.Core.Domains.Tickets.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task RefundTicketAsync(RefundTicketDto refundTicketDto, CancellationToken token)
+        public async Task RefundTicketAsync(RefundTicketCommand refundTicketCommand, CancellationToken token)
         {
-            await _unitOfWork.Segments.RefundSegmentsByTicketNumberAsync(refundTicketDto.TicketNumber, token);
+            await _unitOfWork.Segments.RefundSegmentsByTicketNumberAsync(refundTicketCommand.TicketNumber, token);
         }
 
-        public async Task SaleTicketAsync(SaleTicketDto saleTicketDto, CancellationToken token)
+        public async Task SaleTicketAsync(SaleTicketCommand saleTicketCommand, CancellationToken token)
         {
-            var saleTicket = _mapper.Map<SaleTicket>(saleTicketDto);
+            var saleTicket = _mapper.Map<SaleTicket>(saleTicketCommand);
             await _unitOfWork.Segments.SaleTicketAsync(saleTicket, token);
         }
     }
